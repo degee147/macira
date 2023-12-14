@@ -21,6 +21,7 @@ use App\Actions\Fortify\RedirectIfTwoFactorAuthenticatable;
 
 class AdminController extends Controller
 {
+
     /**
      * The guard implementation.
      *
@@ -41,7 +42,7 @@ class AdminController extends Controller
 
     public function loginForm()
     {
-        return view('auth.login', ['guard' => 'admin']);
+        return view('auth.login_admin', ['guard' => 'admin']);
     }
 
     /**
@@ -87,6 +88,7 @@ class AdminController extends Controller
                 config('fortify.pipelines.login')
             ));
         }
+
 
         return (new Pipeline(app()))->send($request)->through(array_filter([
             config('fortify.limiters.login') ? null : EnsureLoginIsNotThrottled::class,
