@@ -28,7 +28,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 Route::middleware(['auth:sanctum,admin', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('dashboard');
-    })->name('admin_dashboard');
+    })->name('admin_dashboard')->middleware('auth:admin');
 });
 Route::middleware(['admin:admin'])->group(function () {
     Route::get('/admin/login', [AdminController::class, 'loginForm'])->name('admin.login.form');
